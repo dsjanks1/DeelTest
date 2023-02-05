@@ -86,5 +86,5 @@ module.exports = {
   sequelize,
   Profile,
   Contract,
-  Job
+  Job,
 };

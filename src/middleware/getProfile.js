@@ -3,7 +3,7 @@
 //Changed the end() method to send() to provide more meaningful error message.
 const getProfile = async (req, res, next) => {
     const { Profile } = req.app.get('models');
-    const profile = await Profile.findOne({ where: { id: req.params.id } });
+    const profile = await Profile.findOne({ where: { id: req.params.id || 0} });
     if (!profile) return res.status(404).send('Profile not found');
     req.profile = profile;
     next();

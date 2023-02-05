@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const { Op } = require("sequelize");
 const httpStatus = require('http-status');
 const {sequelize} = require('../model')
-const {getProfile} = require('../middleware/getProfile');
-const e = require('express');
 const app = express();
 app.use(bodyParser.json());
 app.set('sequelize', sequelize)
@@ -13,7 +11,7 @@ const ContractService = require('../services/contract.js');
 
 const getContractByID = async (req, res) => {
     try {
-        const contract = await ContractService.getNonTerminatedUserContracts(req);
+        const contract = await ContractService.getContractById(req);
         if (!contract) {
             return res.status(httpStatus.NOT_FOUND).send({ message: 'Contract not found' });
         }
