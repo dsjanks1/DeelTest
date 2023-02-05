@@ -1,5 +1,4 @@
 const httpStatus = require('http-status');
-
 const adminService = require('../services/admin.js');
 
 const getBestProfession = async (req, res) => {
