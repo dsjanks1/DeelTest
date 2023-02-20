@@ -9,12 +9,19 @@ const { Op } = require('sequelize');
 
 const getContractById = async (req) => {
     const { Contract } = req.app.get('models');
-    const contract = await Contract.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    return contract;
+    try{
+        const contract = await Contract.findOne({
+            where: {
+              id: req.params.id,
+            },
+          });
+          return contract;
+    }
+    catch(err)
+    {
+        return
+    }
+
   };
 
 const getNonTerminatedUserContracts = async (req) => {

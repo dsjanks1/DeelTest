@@ -4,7 +4,6 @@ const adminService = require('../services/admin.js');
 const getBestProfession = async (req, res) => {
   try {
     const foundBestProfession = await adminService.getBestProfession(req);
-
     if (!foundBestProfession) {
       res.status(httpStatus.NOT_FOUND).json({ message: 'No best profession found' });
     } else {

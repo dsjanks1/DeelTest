@@ -2,7 +2,6 @@ const { Op } = require('sequelize');
 const { Contract, Job, Profile } = require('../model');
 
 const getBestProfession = async (req) => {
-    // const { Job, Contract, Profile } = req.app.get('models');
     const {start,end} = req.params;
     const sequelize = req.app.get('sequelize');
   
@@ -44,38 +43,9 @@ const getBestProfession = async (req) => {
 
 
   const getBestClients = async (req) => {
-    // const {Contract, Profile} = req.app.get('models');
     const {start,end, limit = 2} = req.params;
     const sequelize = req.app.get('sequelize');
-    // const bestClients = await Job.findAll({
-    //   attributes: ['client',[sequelize.fn('SUM', sequelize.col('price')), 'paid']],
-    //   include: [
-    //     {
-    //       model: Contract,
-    //       as:'Contractor',
-    //       attributes: ['id', 'firstName', 'lastName'],
-    //       required: true,
-    //       include: [
-    //         {
-    //           model: Profile,
-    //           required: true,
-    //           attributes: [],
-    //           where: {        
-    //             paid: true,
-    //             paymentDate: {
-    //               [Op.between]: [start, end],
-    //             } },
-    //         },
-    //       ],
-    //     },
-    //   ],
-    //   order: [[sequelize.fn('SUM', sequelize.col('price')), 'DESC']],
-    //   group: ['client'],
-    //   limit,
-    //   where: {
-    //     type:'Contractor'
-    //   },
-    // });
+    
     const bestClients = await Job.findAll({
       attributes: [[sequelize.fn('sum', sequelize.col('price')), 'paid']],
       order: [[sequelize.fn('sum', sequelize.col('price')), 'DESC']],

@@ -5,7 +5,8 @@ const getActiveUnpaidJobs = async (req) => {
     const { Job, Contract } = req.app.get('models');
     const profileId = req.profile.id;
 
-    const activeUnpaidJobs = await Job.findAll({
+    try {
+      const activeUnpaidJobs = await Job.findAll({
         include: [
             {
                 model: Contract,
@@ -22,6 +23,11 @@ const getActiveUnpaidJobs = async (req) => {
     });
     
     return activeUnpaidJobs;
+    }
+    catch(err){
+      return err;
+    }
+
   };
 
   const clientPay = async (req) => {
